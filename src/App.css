@@ -23,3 +23,66 @@ html {
   --black: #000000;
   --font: "Nunito Sans", sans-serif;
 }
+body {
+  margin: 0;
+  font-family: var(--font);
+  background-color: var(--ltGray);
+}
+header {
+  background-color: var(--white);
+  height: 80px;
+  border-bottom: 0.7px solid var(--drkGray);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 80px 0 81px;
+  height: 100%;
+}
+a {
+  text-decoration: none;
+  color: var(--drkBlue);
+}
+nav a:first-child {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+nav a:last-child {
+  font-size: 16px;
+  font-weight: 600;
+}
+.country-card {
+  width: 264px;
+  height: 336px;
+  border-radius: 5px;
+  background-color: var(--white);
+  box-shadow: 0 0 7px 2px rgba(0, 0, 0, 0.0294), 0 0 7px 2px #999999;
+}
+.country-flag {
+  width: 264px;
+  height: 160px;
+  border-radius: 5px 5px 0 0;
+}
+.country-detail {
+  padding: 24px;
+}
+.country-card h2 {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--drkBlue);
+}
+.country-card p {
+  font-size: 14px;
+  line-height: 16px;
+  margin: 0;
+}
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(4, 264px);
+  gap: 75px;
+  padding: 82px 0 115px 80px;
+}
