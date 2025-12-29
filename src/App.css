@@ -27,20 +27,28 @@ body {
   margin: 0;
   font-family: var(--font);
   background-color: var(--ltGray);
+  max-width: 1440px;
+  margin: 0 auto;
 }
 header {
   background-color: var(--white);
   height: 80px;
   border-bottom: 0.7px solid var(--drkGray);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
 nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 0 80px 0 81px;
+  padding: 0 80px 0 80px;
   height: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 a {
   text-decoration: none;
@@ -84,5 +92,40 @@ nav a:last-child {
   display: grid;
   grid-template-columns: repeat(4, 264px);
   gap: 75px;
-  padding: 82px 0 115px 80px;
+  padding: 82px 80px 115px 80px;
+  justify-content: center;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+@media (max-width: 800px) {
+  .card-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 39px;
+    padding: 142px 55px 115px 56px;
+  }
+
+  nav a:first-child {
+    font-size: 14px;
+  }
+
+  nav a:last-child {
+    font-size: 10px;
+  }
+
+  .country-card {
+    width: 100%;
+    height: auto;
+  }
+
+  .country-flag {
+    width: 100%;
+    height: auto;
+  }
+
+  header {
+    width: 100%;
+    left: 0;
+    transform: none;
+  }
 }
