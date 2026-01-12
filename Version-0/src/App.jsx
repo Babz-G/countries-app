@@ -1,13 +1,8 @@
 import "./App.css";
-// Imports styles for the entire app
-
 import { Routes, Route, Link } from "react-router-dom";
-// Imports routing components: Routes (container), Route (defines paths), Link (navigation)
-
 import Home from "./pages/Home";
 import SavedCountries from "./pages/SavedCountries";
 import CountryDetail from "./pages/CountryDetail";
-// Imports all the page components
 
 function App() {
   return (

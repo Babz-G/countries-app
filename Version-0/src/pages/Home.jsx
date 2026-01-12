@@ -1,10 +1,5 @@
-// Import the array of country data from the root directory
 import localData from "../../localData.js";
-
-// Import the CountryCard component to display individual countries
 import CountryCard from "../Components/CountryCard.jsx";
-
-// Import useState hook from React to manage component state
 import { useState } from "react";
 
 function Home() {
