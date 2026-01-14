@@ -74,12 +74,17 @@ nav a:last-child {
   cursor: pointer;
   transition: box-shadow 0.3s ease;
 }
+
 .country-card:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.country-flag {
   width: 264px;
   height: 160px;
   border-radius: 5px 5px 0 0;
 }
+
 .country-detail {
   padding: 24px;
 }

@@ -5,6 +5,7 @@ import { useState } from "react";
 function Home() {
   // Create state variable to track what user types in search bar
   // searchText stores the current value, setSearchText updates it
+  // searchText starts off as an empty string when component first renders.
   const [searchText, setSearchText] = useState("");
 
   // Create state variable to track which region user selects from dropdown
