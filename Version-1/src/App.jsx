@@ -38,7 +38,7 @@ function App() {
           element={<SavedCountries countryList={countryList} />}
         />
         <Route
-          path="/country/:id"
+          path="/country-detail/:countryName"
           element={<CountryDetail countryList={countryList} />}
         />
       </Routes>
