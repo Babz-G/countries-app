@@ -1,4 +1,5 @@
 function SavedCountries() {
+  console.log("Form Submitted");
   return (
     // Main container for the entire Saved Countries page
     <div className="saved-countries-page">
