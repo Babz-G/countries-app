@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import SavedCountries from "./pages/SavedCountries";
 import CountryDetail from "./pages/CountryDetail";
 import { useState, useEffect } from "react";
-import localData from "../localData";
+import localData from "./localData";
 
 function App() {
   const [countryList, setCountryList] = useState([]);
@@ -17,7 +17,7 @@ function App() {
       console.log(data);
       setCountryList(data);
     } catch (error) {
-      setCountries(localData);
+      setCountryList(localData);
       // if api fails this will use the local data
       console.log(error);
     }

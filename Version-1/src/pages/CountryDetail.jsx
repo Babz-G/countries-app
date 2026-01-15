@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 
-export default function CountryDetail() {
+export default function CountryDetail({ countryList }) {
   const countryName = useParams().countryName;
   console.log(countryName);
   return (

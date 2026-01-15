@@ -1,161 +1,221 @@
-// import "./App.css";
-import "../App.css";
-import { Routes, Route, Link } from "react-router-dom";
-import Home from "./pages/Home";
-import SavedCountries from "./pages/SavedCountries";
-import CountryDetail from "./pages/CountryDetail";
-import { useState, useEffect } from "react";
+import CountryCard from "../Components/CountryCard.jsx";
+import { useState } from "react";
 
-import localData from "../localData";
-// keeping this as a back up if api fails
+function Home({ countryList }) {
+  const [searchText, setSearchText] = useState("");
 
-function App() {
-  const [countryList, setCountryList] = useState([]);
+  const [selectedRegion, setSelectedRegion] = useState("");
 
-  const getCountryList = async () => {
-    try {
-      const response = await fetch(
-        "https://restcountries.com/v3.1/all?fields=name,flags,population,capital,region,cca3,borders"
-      );
+  const filteredCountries = countryList.filter((country) => {
+    const matchesSearch = country.name.common
+      .toLowerCase()
+      .includes(searchText.toLowerCase());
 
-      const data = await response.json();
-      console.log(data);
+    const matchesRegion =
+      selectedRegion === "" || country.region === selectedRegion;
 
-      setCountryList(data);
-    } catch (error) {
-      console.log("API failed, using localData as backup:", error);
+    return matchesSearch && matchesRegion;
+  });
 
-      setCountryList(localData);
-    }
-  };
-  useEffect(() => {
-    getCountryList();
-  }, []);
+  if (countryList.length === 0) {
+    return <div>Loading countries...</div>;
+  }
 
   return (
-    <>
-      <header>
-        <nav>
-          <Link to="/">Where in the world?</Link>
-          <Link to="/saved">Saved Countries</Link>
-        </nav>
-      </header>
+    <div className="homepage-content">
+      <div className="filters-container">
+        <div className="search-container">
+          <svg
+            className="search-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#848484"
+            strokeWidth="2"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
 
-      <Routes>
-        <Route path="/" element={<Home countryList={countryList} />} />
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
 
-        <Route
-          path="/saved"
-          element={<SavedCountries countryList={countryList} />}
-        />
+          <input
+            type="text"
+            placeholder="Search for a country..."
+            className="search-bar"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+          />
+        </div>
 
-        <Route
-          path="/country-detail/:countryName"
-          element={<CountryDetail countryList={countryList} />}
-        />
-      </Routes>
-    </>
+        <select
+          className="region-filter"
+          value={selectedRegion}
+          onChange={(e) => setSelectedRegion(e.target.value)}
+        >
+          <option value="">Filter by Region</option>
+
+          <option value="Africa">Africa</option>
+          <option value="Americas">Americas</option>
+          <option value="Antarctic">Antarctic</option>
+          <option value="Asia">Asia</option>
+          <option value="Europe">Europe</option>
+          <option value="Oceania">Oceania</option>
+        </select>
+      </div>
+
+      <div className="card-container">
+        {filteredCountries
+
+          .sort((a, b) => a.name.common.localeCompare(b.name.common))
+
+          .map((country) => (
+            <CountryCard country={country} key={country.cca3} />
+          ))}
+      </div>
+    </div>
   );
 }
-
-export default App;
+export default Home;
 
 // ✨✨✨ COMMENTED CODE BELOW ✨✨✨
 
-// import "./App.css";
-// import { Routes, Route, Link } from "react-router-dom";
-// import Home from "./pages/Home";
-// import SavedCountries from "./pages/SavedCountries";
-// import CountryDetail from "./pages/CountryDetail";
-// import { useState, useEffect } from "react";
-// import localData from "../localData";
+// import CountryCard from "../Components/CountryCard.jsx";
+// // ✨ Import CountryCard component to display individual country cards
 
-// function App() {
-//   const [countryList, setCountryList] = useState([]);
-//   // ✨ state variable to store country data from API
-//   // ✨ countryList: holds the current data (initially an empty array)
-//   // ✨ setCountryList: function to update the state
+// import { useState } from "react";
+// // ✨ Import useState hook to manage search and filter state
 
-//   const getCountryList = async () => {
-//     // ✨ Define async  function to fetch country data from REST Countries API
-//     // ✨ async keyword enables use of await for handling promises
+// function Home({ countryList }) {
+//   // ✨ Component receives countryList prop from App.jsx containing API data
 
-//     try {
-//       // ✨ Begin try block to handle potential errors during API call
+//   const [searchText, setSearchText] = useState("");
+//   // ✨ State variable to track user's search input
+//   // ✨ searchText: holds current value of search bar
+//   // ✨ setSearchText: function to update searchText
+//   // ✨ Initialized as empty string
 
-//       const response = await fetch(
-//         "https://restcountries.com/v3.1/all?fields=name,flags,population,capital,region,cca3,borders"
-//       );
-//       // ✨ Make HTTP GET request to REST Countries API
-//       // ✨ Query parameters specify only required fields to optimize response size
-//       // ✨ await pauses execution until the promise resolves
+//   const [selectedRegion, setSelectedRegion] = useState("");
+//   // ✨ State variable to track selected region from dropdown
+//   // ✨ selectedRegion: holds current selected region value
+//   // ✨ setSelectedRegion: function to update selectedRegion
+//   // ✨ Initialized as empty string (no filter applied)
 
-//       const data = await response.json();
-//       // ✨ Parse the response body as JSON
-//       // ✨ Converts the raw response into a JavaScript array of country objects
+//   const filteredCountries = countryList.filter((country) => {
+//     // ✨ Filter countries based on both search text and selected region
+//     // ✨ .filter() creates new array containing only countries that match criteria
 
-//       console.log(data);
+//     const matchesSearch = country.name.common
+//       .toLowerCase()
+//       .includes(searchText.toLowerCase());
+//     // ✨ Check if country name contains the search text
+//     // ✨ Convert both to lowercase for case-insensitive comparison
+//     // ✨ .includes() returns true if search text is found anywhere in country name
 
-//       setCountryList(data);
-//       // ✨ Update state with the fetched country data
-//       // ✨ This triggers a re-render, passing new data to child components
+//     const matchesRegion =
+//       selectedRegion === "" || country.region === selectedRegion;
+//     // ✨ Check if country matches selected region
+//     // ✨ If selectedRegion is empty string, show all countries (no filter)
+//     // ✨ Otherwise, only include countries where region matches selection
 
-//     } catch (error) {
-//       // ✨ Catch block executes if any error occurs in try block
-//       // ✨ Handles network failures, invalid responses, or parsing errors
+//     return matchesSearch && matchesRegion;
+//     // ✨ Return true only if BOTH conditions are met
+//     // ✨ Country must match search text AND selected region to be included
+//   });
 
-//       console.log('API failed, using localData as backup:', error);
-//       // ✨ Log the error details to console for debugging purposes
-
-//       setCountryList(localData);
-//       // ✨ Fallback to static local data if API call fails
-//     }
-//   };
-
-//   useEffect(() => {
-//     getCountryList();
-//   }, []);
-//   // ✨ Execute getCountryList function when component mounts
-//   // ✨ Empty dependency array ensures this runs only once on initial render
-//   // ✨ Prevents unnecessary API calls on subsequent re-renders
+//   // ✨ Loading state handling
+//   if (countryList.length === 0) {
+//     return <div>Loading countries...</div>;
+//   }
+//   // ✨ If countryList is empty (API still loading), display loading message
+//   // ✨ Prevents errors from trying to filter an empty array
+//   // ✨ Once API data arrives, component re-renders with actual data
 
 //   return (
-//     <>
-//       <header>
-//         <nav>
+//     <div className="homepage-content">
 
-//           <Link to="/">Where in the world?</Link>
-//           {/* Nav link to Home page - functions as app title/home button */}
+//       <div className="filters-container">
 
-//           <Link to="/saved">Saved Countries</Link>
-//           {/* Nav link to Saved Countries page */}
-//         </nav>
-//       </header>
+//         <div className="search-container">
 
-//       <Routes>
-//         {/* Routes container manages which component displays based on URL */}
+//           <svg
+//             className="search-icon"
+//             xmlns="http://www.w3.org/2000/svg"
+//             viewBox="0 0 24 24"
+//             fill="none"
+//             stroke="#848484"
+//             strokeWidth="2"
+//           >
+//             {/* SVG magnifying glass icon */}
 
-//         <Route path="/" element={<Home countryList={countryList} />} />
-//         {/* ✨ Route for Home page at root URL */}
-//         {/* ✨ Passes countryList data as prop to Home component */}
+//             <circle cx="11" cy="11" r="8"></circle>
+//             {/* Circle portion of magnifying glass */}
 
-//         <Route
-//           path="/saved"
-//           element={<SavedCountries countryList={countryList} />}
-//         />
-//         {/* ✨ Route for Saved Countries page */}
-//         {/* ✨ Passes countryList data as prop for potential future use */}
+//             <path d="m21 21-4.35-4.35"></path>
+//             {/* Handle portion of magnifying glass */}
+//           </svg>
 
-//         <Route
-//           path="/country-detail/:countryName"
-//           element={<CountryDetail countryList={countryList} />}
-//         />
-//         {/* ✨ Route for Country Detail page with dynamic URL parameter */}
-//         {/* ✨ :countryName captures the country name from URL */}
-//         {/* ✨ Passes countryList so component can find and display specific country data */}
-//       </Routes>
-//     </>
+//           <input
+//             type="text"
+//             placeholder="Search for a country..."
+//             className="search-bar"
+//             value={searchText}
+//             // Controlled input: value is tied to searchText state
+
+//             onChange={(e) => setSearchText(e.target.value)}
+//             // ✨ Event handler fires every time user types
+//             // ✨ e.target.value contains current input value
+//             // ✨ Updates searchText state, triggering re-render and filter update
+//           />
+//         </div>
+
+//         <select
+//           className="region-filter"
+//           value={selectedRegion}
+//           // ✨ Controlled select: value is tied to selectedRegion state
+
+//           onChange={(e) => setSelectedRegion(e.target.value)}
+//           // ✨ Event handler fires when user selects new option
+//           // ✨ Updates selectedRegion state, triggering re-render and filter update
+//         >
+//           <option value="">Filter by Region</option>
+//           {/* ✨  Default option with empty value - shows all regions */}
+
+//           <option value="Africa">Africa</option>
+//           <option value="Americas">Americas</option>
+//           <option value="Antarctic">Antarctic</option>
+//           <option value="Asia">Asia</option>
+//           <option value="Europe">Europe</option>
+//           <option value="Oceania">Oceania</option>
+//           {
+//         </select>
+//       </div>
+
+//       <div className="card-container">
+
+//         {filteredCountries
+
+//           .sort((a, b) => a.name.common.localeCompare(b.name.common))
+//           // ✨ Sort countries alphabetically by name
+//           // ✨ .localeCompare() properly handles alphabetical sorting with special characters
+//           // ✨ Compares two countries (a and b) at a time
+
+//           .map((country) => (
+//             // ✨ Loop through each country in the filtered and sorted array
+//             // ✨ .map() transforms each country object into a CountryCard component
+
+//             <CountryCard
+//               country={country}
+//               // ✨ Pass entire country object as prop to CountryCard
+
+//               key={country.cca3}
+//               // ✨ Unique key for React to track each card efficiently
+//               // ✨ cca3 is a unique 3-letter country code (e.g., "USA", "FRA")
+//               // ✨ Required by React for list items to optimize rendering
+//             />
+//           ))}
+//       </div>
+//     </div>
 //   );
 // }
 
-// export default App;
+// export default Home;

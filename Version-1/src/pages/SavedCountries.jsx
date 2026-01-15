@@ -1,4 +1,4 @@
-function SavedCountries() {
+function SavedCountries({ countryList }) {
   console.log("Form Submitted");
   return (
     <div className="saved-countries-page">
