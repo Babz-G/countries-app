@@ -1,4 +1,5 @@
-import "./App.css";
+// import "./App.css";
+import "../App.css";
 import { Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import SavedCountries from "./pages/SavedCountries";
