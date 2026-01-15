@@ -1,110 +1,160 @@
-import localData from "../../localData.js";
-import CountryCard from "../Components/CountryCard.jsx";
-import { useState } from "react";
+import "./App.css";
+import { Routes, Route, Link } from "react-router-dom";
+import Home from "./pages/Home";
+import SavedCountries from "./pages/SavedCountries";
+import CountryDetail from "./pages/CountryDetail";
+import { useState, useEffect } from "react";
 
-function Home() {
-  // Create state variable to track what user types in search bar
-  // searchText stores the current value, setSearchText updates it
-  const [searchText, setSearchText] = useState("");
+import localData from "../localData";
+// keeping this as a back up if api fails
 
-  // Create state variable to track which region user selects from dropdown
-  // selectedRegion stores the current value, setSelectedRegion updates it
-  const [selectedRegion, setSelectedRegion] = useState("");
+function App() {
+  const [countryList, setCountryList] = useState([]);
 
-  // Filter the countries based on both search text and selected region
-  const filteredCountries = localData.filter((country) => {
-    // Check if the country's name includes the search text (case-insensitive)
-    // .toLowerCase() makes both strings lowercase so "FRANCE" matches "france"
-    // .includes() checks if one string contains another
-    const matchesSearch = country.name.common
-      .toLowerCase()
-      .includes(searchText.toLowerCase());
+  const getCountryList = async () => {
+    try {
+      const response = await fetch(
+        "https://restcountries.com/v3.1/all?fields=name,flags,population,capital,region,cca3,borders"
+      );
 
-    // Check if country's region matches the selected region
-    // If no region is selected (empty string), show all regions
-    // Otherwise, only show countries from the selected region
-    const matchesRegion =
-      selectedRegion === "" || country.region === selectedRegion;
+      const data = await response.json();
+      console.log(data);
 
-    // Return true only if BOTH search and region conditions are met
-    // This country will be included in filteredCountries array
-    return matchesSearch && matchesRegion;
-  });
+      setCountryList(data);
+    } catch (error) {
+      console.log("API failed, using localData as backup:", error);
+
+      setCountryList(localData);
+    }
+  };
+  useEffect(() => {
+    getCountryList();
+  }, []);
 
   return (
-    <div className="homepage-content">
-      {/* Container holds both search bar and region filter side-by-side */}
-      <div className="filters-container">
-        {/* Search bar container with magnifying glass icon */}
-        <div className="search-container">
-          {/* SVG magnifying glass icon positioned absolutely inside search bar */}
-          <svg
-            className="search-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#848484"
-            strokeWidth="2"
-          >
-            {/* Circle part of magnifying glass */}
-            <circle cx="11" cy="11" r="8"></circle>
-            {/* Handle part of magnifying glass */}
-            <path d="m21 21-4.35-4.35"></path>
-          </svg>
+    <>
+      <header>
+        <nav>
+          <Link to="/">Where in the world?</Link>
+          <Link to="/saved">Saved Countries</Link>
+        </nav>
+      </header>
 
-          {/* Search input field */}
-          <input
-            type="text"
-            placeholder="Search for a country..."
-            className="search-bar"
-            value={searchText}
-            // When user types, update searchText state with the new value
-            // This triggers a re-render and filters the countries
-            onChange={(e) => setSearchText(e.target.value)}
-          />
-        </div>
+      <Routes>
+        <Route path="/" element={<Home countryList={countryList} />} />
 
-        {/* Region filter dropdown */}
-        <select
-          className="region-filter"
-          value={selectedRegion}
-          // When user selects a region, update selectedRegion state
-          // This triggers a re-render and filters the countries
-          onChange={(e) => setSelectedRegion(e.target.value)}
-        >
-          {/* Default option shows "Filter by Region" and has empty value */}
-          <option value="">Filter by Region</option>
-          <option value="Africa">Africa</option>
-          <option value="Americas">Americas</option>
-          <option value="Antarctic">Antarctic</option>
-          <option value="Asia">Asia</option>
-          <option value="Europe">Europe</option>
-          <option value="Oceania">Oceania</option>
-        </select>
-      </div>
+        <Route
+          path="/saved"
+          element={<SavedCountries countryList={countryList} />}
+        />
 
-      {/* Grid container displays all the filtered country cards */}
-      <div className="card-container">
-        {filteredCountries
-          // Sort countries alphabetically by their common name
-          // .sort() compares two countries (a and b) at a time
-          // .localeCompare() properly handles alphabetical sorting
-          .sort((a, b) => a.name.common.localeCompare(b.name.common))
-
-          // Loop through each filtered and sorted country
-          // Create a CountryCard component for each one
-          .map((country) => (
-            <CountryCard
-              country={country}
-              // key helps React track each card efficiently
-              // cca3 is a unique 3-letter country code from the data
-              key={country.cca3}
-            />
-          ))}
-      </div>
-    </div>
+        <Route
+          path="/country-detail/:countryName"
+          element={<CountryDetail countryList={countryList} />}
+        />
+      </Routes>
+    </>
   );
 }
 
-// Export so this component can be used in App.jsx as a route
-export default Home;
+export default App;
+
+// ✨✨✨ COMMENTED CODE BELOW ✨✨✨
+
+// import "./App.css";
+// import { Routes, Route, Link } from "react-router-dom";
+// import Home from "./pages/Home";
+// import SavedCountries from "./pages/SavedCountries";
+// import CountryDetail from "./pages/CountryDetail";
+// import { useState, useEffect } from "react";
+// import localData from "../localData";
+
+// function App() {
+//   const [countryList, setCountryList] = useState([]);
+//   // ✨ state variable to store country data from API
+//   // ✨ countryList: holds the current data (initially an empty array)
+//   // ✨ setCountryList: function to update the state
+
+//   const getCountryList = async () => {
+//     // ✨ Define async  function to fetch country data from REST Countries API
+//     // ✨ async keyword enables use of await for handling promises
+
+//     try {
+//       // ✨ Begin try block to handle potential errors during API call
+
+//       const response = await fetch(
+//         "https://restcountries.com/v3.1/all?fields=name,flags,population,capital,region,cca3,borders"
+//       );
+//       // ✨ Make HTTP GET request to REST Countries API
+//       // ✨ Query parameters specify only required fields to optimize response size
+//       // ✨ await pauses execution until the promise resolves
+
+//       const data = await response.json();
+//       // ✨ Parse the response body as JSON
+//       // ✨ Converts the raw response into a JavaScript array of country objects
+
+//       console.log(data);
+
+//       setCountryList(data);
+//       // ✨ Update state with the fetched country data
+//       // ✨ This triggers a re-render, passing new data to child components
+
+//     } catch (error) {
+//       // ✨ Catch block executes if any error occurs in try block
+//       // ✨ Handles network failures, invalid responses, or parsing errors
+
+//       console.log('API failed, using localData as backup:', error);
+//       // ✨ Log the error details to console for debugging purposes
+
+//       setCountryList(localData);
+//       // ✨ Fallback to static local data if API call fails
+//     }
+//   };
+
+//   useEffect(() => {
+//     getCountryList();
+//   }, []);
+//   // ✨ Execute getCountryList function when component mounts
+//   // ✨ Empty dependency array ensures this runs only once on initial render
+//   // ✨ Prevents unnecessary API calls on subsequent re-renders
+
+//   return (
+//     <>
+//       <header>
+//         <nav>
+
+//           <Link to="/">Where in the world?</Link>
+//           {/* Nav link to Home page - functions as app title/home button */}
+
+//           <Link to="/saved">Saved Countries</Link>
+//           {/* Nav link to Saved Countries page */}
+//         </nav>
+//       </header>
+
+//       <Routes>
+//         {/* Routes container manages which component displays based on URL */}
+
+//         <Route path="/" element={<Home countryList={countryList} />} />
+//         {/* ✨ Route for Home page at root URL */}
+//         {/* ✨ Passes countryList data as prop to Home component */}
+
+//         <Route
+//           path="/saved"
+//           element={<SavedCountries countryList={countryList} />}
+//         />
+//         {/* ✨ Route for Saved Countries page */}
+//         {/* ✨ Passes countryList data as prop for potential future use */}
+
+//         <Route
+//           path="/country-detail/:countryName"
+//           element={<CountryDetail countryList={countryList} />}
+//         />
+//         {/* ✨ Route for Country Detail page with dynamic URL parameter */}
+//         {/* ✨ :countryName captures the country name from URL */}
+//         {/* ✨ Passes countryList so component can find and display specific country data */}
+//       </Routes>
+//     </>
+//   );
+// }
+
+// export default App;
