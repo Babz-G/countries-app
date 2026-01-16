@@ -77,14 +77,14 @@ export default App;
 //   const [countryList, setCountryList] = useState([]);
 //   // ✨ Initialize state variable to store country data from API
 //   // ✨ countryList: holds the current data (initially an empty array)
-//   //✨  setCountryList: function to update the state
+//   // ✨  setCountryList: function to update the state
 
 //   const getCountryList = async () => {
 //     // ✨ Define asynchronous function to fetch country data from REST Countries API
 //     // ✨ async keyword enables use of await for handling promises
 
 //     try {
-//       //✨  Begin try block to handle potential errors during API call
+//       // ✨  Begin try block to handle potential errors during API call
 
 //       const response = await fetch(
 //         "https://restcountries.com/v3.1/all?fields=name,flags,population,capital,region,cca3,borders"

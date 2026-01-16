@@ -3,10 +3,19 @@ import { Link, useParams } from "react-router-dom";
 export default function CountryDetail({ countryList }) {
   const countryName = useParams().countryName;
   console.log(countryName);
+  const country = countryList.find(
+    (oneCountry) => oneCountry.name.common === countryName
+  );
   return (
     <div>
-      <h1>Country Detail Page</h1>
-      <p>Details</p>
+      <h1>{country.name.common}</h1>
+      <img
+        src={country.flags.png}
+        alt={`Individual flag of ${country.name.common}`}
+      />
+      <p>Population: {country.population.toLocaleString()}</p>
+      <p>Region: {country.region}</p>
+      <p>Capital: {country.capital[0]}</p>
     </div>
   );
 }
