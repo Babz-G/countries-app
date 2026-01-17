@@ -300,3 +300,55 @@ nav a:last-child {
     transform: none;
   }
 }
+/* Country Detail Page */
+.country-detail-page {
+  padding: 80px 80px 115px 80px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 136px;
+  height: 40px;
+  background-color: var(--white);
+  border-radius: 6px;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.293);
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--drkBlue);
+  margin-bottom: 80px;
+  transition: all 0.3s ease;
+}
+
+.back-button:hover {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+}
+
+.detail-content {
+  display: flex;
+  gap: 144px;
+  align-items: flex-start;
+}
+
+.detail-flag {
+  width: 560px;
+  height: 401px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 0 14px 4px rgba(0, 0, 0, 0.0294);
+}
+
+.detail-info {
+  flex: 1;
+}
+
+// CSS MEASUREMENTS - COUNTRY DETAIL PAGE
+// LAYOUT 280, 82, 343, 80
+// FLAG 560x401
+// CARD 598x323
+// H1 124x44
+// BUTTON 96X28
+// BODY 171x128

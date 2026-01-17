@@ -8,7 +8,9 @@ import localData from "./localData";
 
 function App() {
   const [countryList, setCountryList] = useState([]);
+  // Declaring a state variable
   const getCountryList = async () => {
+    // Async gives access to await
     try {
       const response = await fetch(
         "https://restcountries.com/v3.1/all?fields=name,flags,population,capital,region,cca3,borders"
@@ -76,12 +78,12 @@ export default App;
 // function App() {
 //   const [countryList, setCountryList] = useState([]);
 //   // ✨ Initialize state variable to store country data from API
-//   // ✨ countryList: holds the current data (initially an empty array)
-//   // ✨  setCountryList: function to update the state
+//   // ✨ countryList holds the current data (initially an empty array)
+//   // ✨ setCountryList function to update the state
 
 //   const getCountryList = async () => {
 //     // ✨ Define asynchronous function to fetch country data from REST Countries API
-//     // ✨ async keyword enables use of await for handling promises
+//     // ✨ async keyword enables use of WAIT for handling promises
 
 //     try {
 //       // ✨  Begin try block to handle potential errors during API call

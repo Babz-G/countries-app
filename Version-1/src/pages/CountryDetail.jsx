@@ -2,23 +2,75 @@ import { Link, useParams } from "react-router-dom";
 
 export default function CountryDetail({ countryList }) {
   const countryName = useParams().countryName;
-  console.log(countryName);
   const country = countryList.find(
     (oneCountry) => oneCountry.name.common === countryName
   );
+
   return (
-    <div>
-      <h1>{country.name.common}</h1>
-      <img
-        src={country.flags.png}
-        alt={`Individual flag of ${country.name.common}`}
-      />
-      <p>Population: {country.population.toLocaleString()}</p>
-      <p>Region: {country.region}</p>
-      <p>Capital: {country.capital[0]}</p>
+    <div className="country-detail-page">
+      <Link to="/" className="back-button">
+        ← Back
+      </Link>
+
+      <div className="detail-content">
+        <img
+          src={country.flags.png}
+          alt={`Individual flag of ${country.name.common}`}
+          className="detail-flag"
+        />
+
+        <div className="detail-info">
+          <h1>{country.name.common}</h1>
+          <button className="save-button">Save</button>
+
+          <div className="detail-text">
+            <p>
+              <strong>Population:</strong> {country.population.toLocaleString()}
+            </p>
+            <p>
+              <strong>Region:</strong> {country.region}
+            </p>
+            <p>
+              <strong>Capital:</strong>{" "}
+              {country.capital ? country.capital[0] : "N/A"}
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
+
+// CSS MEASUREMENTS - COUNTRY DETAIL PAGE
+// LAYOUT 280, 82, 343, 80
+// FLAG 560x401
+// CARD 598x323
+// H1 124x44
+// BUTTON 96X28
+// BODY 171x128
+
+// import { Link, useParams } from "react-router-dom";
+
+// export default function CountryDetail({ countryList }) {
+//   const countryName = useParams().countryName;
+//   console.log(countryName);
+//   console.log("Country List", countryList);
+//   const country = countryList.find(
+//     (oneCountry) => oneCountry.name.common === countryName
+//   );
+//   return (
+//     <div>
+//       <h1>{country.name.common}</h1>
+//       <img
+//         src={country.flags.png}
+//         alt={`Individual flag of ${country.name.common}`}
+//       />
+//       <p>Population: {country.population.toLocaleString()}</p>
+//       <p>Region: {country.region}</p>
+//       <p>Capital: {country.capital[0]}</p>
+//     </div>
+//   );
+// }
 
 // ✨✨✨ COMMENTED CODE BELOW ✨✨✨
 
