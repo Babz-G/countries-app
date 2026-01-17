@@ -5,7 +5,13 @@ export default function CountryDetail({ countryList }) {
   const country = countryList.find(
     (oneCountry) => oneCountry.name.common === countryName
   );
-
+  if (!country) {
+    return <div>Loading...</div>;
+  }
+  // added this line bc when i refreshed countryDetail page, it crashed.
+  // country is undefined bc countryList is empty while api loads.
+  // then my cide tries to access country.flag.png but crashes bc country doesnt exist yet.
+  // the if (!country) makes sure the csountry exists before trying to display it
   return (
     <div className="country-detail-page">
       <Link to="/" className="back-button">

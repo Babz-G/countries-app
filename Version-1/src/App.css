@@ -131,7 +131,7 @@ nav a:last-child {
   outline: none;
 }
 .homepage-content {
-  padding-top: 48px;
+  padding-top: 80px;
 }
 .search-container {
   position: relative;
@@ -365,7 +365,8 @@ nav a:last-child {
   margin-top: 17px;
 }
 .save-button:hover {
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  /* box-shadow: 0 0 15px rgba(0, 0, 0, 0.4); */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
 }
 /* CSS MEASUREMENTS - COUNTRY DETAIL PAGE
 LAYOUT 280, 82, 343, 80
