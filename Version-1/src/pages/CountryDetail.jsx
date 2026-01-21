@@ -11,7 +11,7 @@ export default function CountryDetail({ countryList }) {
   // added this line bc when i refreshed countryDetail page, it crashed.
   // country is undefined bc countryList is empty while api loads.
   // then my cide tries to access country.flag.png but crashes bc country doesnt exist yet.
-  // the if (!country) makes sure the csountry exists before trying to display it
+  // the if (!country) makes sure the country exists before trying to display it.
   return (
     <div className="country-detail-page">
       <Link to="/" className="back-button">
@@ -55,29 +55,6 @@ export default function CountryDetail({ countryList }) {
 // BUTTON 96X28
 // BODY 171x128
 
-// import { Link, useParams } from "react-router-dom";
-
-// export default function CountryDetail({ countryList }) {
-//   const countryName = useParams().countryName;
-//   console.log(countryName);
-//   console.log("Country List", countryList);
-//   const country = countryList.find(
-//     (oneCountry) => oneCountry.name.common === countryName
-//   );
-//   return (
-//     <div>
-//       <h1>{country.name.common}</h1>
-//       <img
-//         src={country.flags.png}
-//         alt={`Individual flag of ${country.name.common}`}
-//       />
-//       <p>Population: {country.population.toLocaleString()}</p>
-//       <p>Region: {country.region}</p>
-//       <p>Capital: {country.capital[0]}</p>
-//     </div>
-//   );
-// }
-
 // ✨✨✨ COMMENTED CODE BELOW ✨✨✨
 
 // import { Link, useParams } from "react-router-dom";
@@ -104,4 +81,4 @@ export default function CountryDetail({ countryList }) {
 //   );
 // }
 
-// // Component is exported as default export for use in App.jsx routing
+// // Component is exported as default export for use in App.jsx routing ⬅

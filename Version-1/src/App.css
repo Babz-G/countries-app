@@ -163,7 +163,7 @@ nav a:last-child {
   background-color: var(--white);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border: none;
-  padding: 0 24px 0 24px;
+  padding: 0 48px 0 24px;
   font-family: var(--font);
   font-size: 14px;
   color: var(--drkBlue);
