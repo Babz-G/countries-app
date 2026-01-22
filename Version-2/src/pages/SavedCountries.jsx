@@ -1,19 +1,81 @@
+import { useState, useEffect } from "react";
+
 function SavedCountries({ countryList }) {
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    country: "",
+    bio: "",
+  });
+  const [newestUserData, setNewestUserData] = useState(null);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const getNewestUserData = async () => {
+    try {
+      const response = await fetch("/api/get-newest-user", {
+        method: "GET",
+      });
+      const data = await response.json();
+      const userData = data[0];
+      setNewestUserData({
+        fullName: userData.name,
+        email: userData.email,
+        country: userData.country_name,
+        bio: userData.bio,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getNewestUserData();
+  }, []);
   console.log("Form Submitted");
   return (
     <div className="saved-countries-page">
       <h1 className="page-heading">My Saved Countries</h1>
-
+      {newestUserData && <h2>Welcome, {newestUserData.fullName}!</h2>}
       <form className="profile-form">
         <h2 className="form-heading">My Profile</h2>
 
-        <input type="text" placeholder="Full Name" className="form-input" />
-
-        <input type="email" placeholder="Email" className="form-input" />
-
-        <input type="text" placeholder="Country" className="form-input" />
-
-        <textarea placeholder="Bio" className="form-textarea" />
+        <input
+          type="text"
+          name="fullName"
+          value={formData.fullName}
+          onChange={handleInputChange}
+          placeholder="Full name"
+          className="form-input"
+          required
+        ></input>
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleInputChange}
+          placeholder="Email"
+          className="form-input"
+          required
+        ></input>
+        <input
+          type="text"
+          name="country"
+          value={formData.country}
+          onChange={handleInputChange}
+          placeholder="Country"
+          className="form-input"
+          required
+        ></input>
+        <textarea
+          name="bio"
+          value={formData.bio}
+          onChange={handleInputChange}
+          placeholder="Bio"
+          className="form-textarea"
+          required
+        />
 
         <button type="submit" className="form-submit">
           Submit
