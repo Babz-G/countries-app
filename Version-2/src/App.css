@@ -187,12 +187,21 @@ nav a:last-child {
   line-height: 100%;
   color: var(--drkBlue);
   margin-left: 80px;
-  margin-bottom: 59px;
+  margin-bottom: 30px;
 }
 
 .profile-form {
   margin-left: 80px;
   width: 480px;
+}
+.welcome {
+  font-family: var(--font);
+  font-size: 20px;
+  font-weight: 800;
+  /* line-height: 100%; */
+  color: var(--drkBlue);
+  margin-left: 80px;
+  margin-bottom: 30px;
 }
 
 .form-heading {

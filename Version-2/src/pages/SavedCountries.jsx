@@ -8,6 +8,8 @@ function SavedCountries({ countryList }) {
     bio: "",
   });
   const [newestUserData, setNewestUserData] = useState(null);
+  const [savedCountries, setSavedCountries] = useState([]);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -20,24 +22,36 @@ function SavedCountries({ countryList }) {
       });
       const data = await response.json();
       const userData = data[0];
-      setNewestUserData({
-        fullName: userData.name,
-        email: userData.email,
-        country: userData.country_name,
-        bio: userData.bio,
-      });
+
+      setNewestUserData;
     } catch (error) {
       console.log(error);
     }
   };
+  const getSavedCountries = async () => {
+    try {
+      const response = await fetch("/api/get-all-saved-countries", {
+        method: "GET",
+      });
+      const data = await response.json();
+      setSavedCountries(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getNewestUserData();
+    getSavedCountries();
   }, []);
   console.log("Form Submitted");
+
   return (
     <div className="saved-countries-page">
       <h1 className="page-heading">My Saved Countries</h1>
-      {newestUserData && <h2>Welcome, {newestUserData.fullName}!</h2>}
+      {newestUserData && (
+        <h2 className="welcome">Welcome, {newestUserData.fullName}!</h2>
+      )}
       <form className="profile-form">
         <h2 className="form-heading">My Profile</h2>
 

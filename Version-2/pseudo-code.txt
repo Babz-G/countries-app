@@ -35,10 +35,10 @@ This is our WHAT, WHEN, WHERE, HOW framework for working with data:
 ========================
 
 ❓ WHAT...
-TYPE OF HTTP REQUEST (GET OR POST): ------ ✨Post?✨
+TYPE OF HTTP REQUEST (GET OR POST): ------ ✨Post✨
 API ENDPOINT: ------ ✨/add-one-user✨
 
-REQUEST BODY DATA TYPE (if applicable): ------ ✨ object ✨
+REQUEST BODY DATA TYPE (if applicable): ------ ✨Object✨
 
 REQUEST BODY (if applicable): ------
 ✨ {
@@ -57,10 +57,16 @@ RESPONSE: ------ ✨Success! User has been added.✨
 ❓ WHERE: ------ ✨Form is in SavedCountries PAge✨
 
 ❓ HOW: ✨✨
+1- Write a function for storing form data call it storeUserData
+2- Put a post reqest in it
+3- call the for data storing function from handle submit
 
-Step 1: ------
-Step 2: ------
-Step 3: ------
+Step 1: ✨Prevent the page from refreshing when user submits the form✨
+Step 2: ✨Get the actual form data from the formData state variable✨
+Step 3: ✨Send post request to the /add-one-user endpoint✨
+Step 4: ✨Then get the newest user dat again to update the welcome message✨
+Step 5: ✨Rest the from to OG empty✨
+
 Add more steps as needed!
 
 ========================
@@ -108,47 +114,60 @@ Add more steps as needed!
 ========================
 
 ❓ WHAT...
-TYPE OF HTTP REQUEST (GET OR POST): ------
-API ENDPOINT: ------
+TYPE OF HTTP REQUEST (GET OR POST): ✨Post✨
+API ENDPOINT: ✨/save-one-country✨
 
-REQUEST BODY DATA TYPE (if applicable): ------
-REQUEST BODY (if applicable): ------
+REQUEST BODY DATA TYPE (if applicable): ✨Object✨
+REQUEST BODY (if applicable): 
+✨{
+  "country_name": "Brazil"
+}✨
 
-RESPONSE DATA TYPE: ------
-RESPONSE: ------
+RESPONSE DATA TYPE: ✨String✨
+RESPONSE: ✨Success! The country is saved.✨
 
-❓ WHEN: ------
+❓ WHEN: ✨When the user clicks the save button✨
 
-❓ WHERE: ------
+❓ WHERE: ✨CountryDetail page✨
 
 ❓ HOW:
-Step 1: ------
-Step 2: ------
-Step 3: ------
-Add more steps as needed!
+Step 1: ✨When user clicks the save button, run a function called handleSavedCountry✨
+Step 2: ✨Get the country name from the country object (country.name.common)✨
+Step 3: ✨Post Request is sent to /save-one-country API with the country name in the request body✨
+Step 4: ✨Fetch the saved countries again to update the list" OR "Show a success message✨
 
 ========================
 🔶 RETRIEVING SAVED COUNTRIES DATA
 ========================
 
 ❓ WHAT...
-TYPE OF HTTP REQUEST (GET OR POST): ------
-API ENDPOINT: ------
+TYPE OF HTTP REQUEST (GET OR POST): ------✨Get✨
+API ENDPOINT: ------✨/get-all-saved-countries✨
 
-REQUEST BODY DATA TYPE (if applicable): ------
-REQUEST BODY (if applicable): ------
+REQUEST BODY DATA TYPE (if applicable): ------✨N/A✨
+REQUEST BODY (if applicable): ------✨N/A✨
 
-RESPONSE DATA TYPE: ------
+RESPONSE DATA TYPE: ------✨Array✨
 RESPONSE: ------
+✨[
+  {
+    "country_name": "Japan"
+  },
+  {
+    "country_name": "Germany"
+  }
+]✨
 
-❓ WHEN: ------
+❓ WHEN: ------✨When the SavedCountries page loads✨
 
-❓ WHERE: ------
+❓ WHERE: ------✨SavedCountries page✨
 
 ❓ HOW:
-Step 1: ------
-Step 2: ------
-Step 3: ------
+Step 1: ------✨When the SavedCountries page loads it calls the getSavedCountries function✨
+Step 2: ------✨Sends a GET request to /get-all-saved-countries endpoint✨
+Step 3: ------✨Stores the data in the savedCountries state variable✨
+Step 4: ------✨Use map() and find() to match the saved country names with their full country objects from countryList✨
+Step 5: ------✨Renders the matched countries using CountryCard✨
 Add more steps as needed!
 
 =================================
@@ -158,24 +177,32 @@ Add more steps as needed!
 ========================
 🔶 STORING & RETRIEVING COUNTRY COUNTS DATA
 ========================
-NOTE: We combine storing & retrieving country counts data into one section because they always happen together. Each time we look up a country’s view count, we also need to increase it and save the new total.
+NOTE: We combine storing & retrieving country counts data into one section because they always happen together.
+Each time we look up a country’s view count, we also need to increase it and save the new total.
 
 ❓ WHAT...
-TYPE OF HTTP REQUEST (GET OR POST): ------
-API ENDPOINT: ------
+TYPE OF HTTP REQUEST (GET OR POST): ✨POST✨
+API ENDPOINT: ✨/update-one-country-count✨
 
-REQUEST BODY DATA TYPE (if applicable): ------
-REQUEST BODY (if applicable): ------
+REQUEST BODY DATA TYPE (if applicable): ✨Object✨
+REQUEST BODY (if applicable):
+✨{
+  "country_name": "France"
+}✨
 
-RESPONSE DATA TYPE: ------
-RESPONSE: ------
+RESPONSE DATA TYPE: ✨Object✨
+RESPONSE:
+✨{
+  "count": 3
+}✨
 
-❓ WHEN: ------
+❓ WHEN:  ✨When user clicks on a country to view its details. When the CountryDetail page loads.✨
 
-❓ WHERE: ------
+❓ WHERE: ✨CountryDetail page✨
 
 ❓ HOW:
-Step 1: ------
-Step 2: ------
-Step 3: ------
-Add more steps as needed!
+Step 1: ✨When the CountryDetail page loads call the updateCountryCount function✨
+Step 2: ✨Get the country name from the current country being displayed✨
+Step 3: ✨Send a POST request to /update-one-country-count w/ the country name in the request body✨
+Step 4: ✨Recieves the updated count in the response.✨
+Step 5: ✨Renders the new count on the CountryDetail Page✨
