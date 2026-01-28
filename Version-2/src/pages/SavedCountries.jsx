@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import CountryCard from "../Components/CountryCard.jsx";
 
 function SavedCountries({ countryList }) {
   const [formData, setFormData] = useState({
@@ -23,7 +24,12 @@ function SavedCountries({ countryList }) {
       const data = await response.json();
       const userData = data[0];
 
-      setNewestUserData;
+      setNewestUserData({
+        fullName: userData.name,
+        email: userData.email,
+        country: userData.country_name,
+        bio: userData.bio,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -45,6 +51,12 @@ function SavedCountries({ countryList }) {
     getSavedCountries();
   }, []);
   console.log("Form Submitted");
+
+  const matchedCountries = savedCountries.map((savedCountry) => {
+    return countryList.find((country) => {
+      return country.name.common === savedCountry.country_name;
+    });
+  });
 
   return (
     <div className="saved-countries-page">
@@ -95,6 +107,11 @@ function SavedCountries({ countryList }) {
           Submit
         </button>
       </form>
+      <div className="card-container">
+        {matchedCountries.map((country) => (
+          <CountryCard country={country} key={country.cca3} />
+        ))}
+      </div>
     </div>
   );
 }
