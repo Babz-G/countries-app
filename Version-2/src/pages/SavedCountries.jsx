@@ -40,7 +40,7 @@ function SavedCountries({ countryList }) {
       body: JSON.stringify({
         // JSON.stringify() converts JS object into a JSON string
         // bc data traveling over the internet must be in text format
-        // Use dot notation to match our form data with what the backend expects
+        // Using dot notation to match our form data with what the backend expects
         name: data.fullName,
         country_name: data.country,
         email: data.email,
@@ -50,22 +50,38 @@ function SavedCountries({ countryList }) {
 
     // If the response is text type, use response.text()
     // If the response is JSON data, use response.json()
-    // The backend returns a text message: "Success! User has been added."
+    // Returns a message "Success! User has been added."
     const result = await response.text();
     console.log(result);
   };
 
+  // ✨✨ This handles form submission ✨✨
+  // ✨✨ This function is called when the user clicks the Submit button ✨✨
   const handleSubmit = (e) => {
+    // The function receives an event object 'e' from the form submission
+
     e.preventDefault();
+    // Prevents the default form behavior (page refresh)
+    // Without this, the page would reload and we'd lose all our data
+
     console.log(formData);
+
     storeUserData(formData);
+    // Calls the storeUserData function and passes it the form data
+    // This is what actually sends the POST request to save the data
+
     setFormData({
+      // Resets the form to empty state after submission
+      // This clears all the input fields so the user can submit again
       fullName: "",
       email: "",
       country: "",
       bio: "",
     });
+
     getNewestUserData();
+    // Fetches the newest user data from the backend
+    // This updates the welcome message to show the user's name after they submit
   };
   const getNewestUserData = async () => {
     try {
