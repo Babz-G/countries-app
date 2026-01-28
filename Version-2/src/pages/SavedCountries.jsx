@@ -15,7 +15,35 @@ function SavedCountries({ countryList }) {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+  const storeUserData = async (data) => {
+    const response = await fetch("/api/add-one-user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: data.fullName,
+        country_name: data.country,
+        email: data.email,
+        bio: data.bio,
+      }),
+    });
 
+    const result = await response.text();
+    console.log(result);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+    storeUserData(formData);
+    setFormData({
+      fullName: "",
+      email: "",
+      country: "",
+      bio: "",
+    });
+    getNewestUserData();
+  };
   const getNewestUserData = async () => {
     try {
       const response = await fetch("/api/get-newest-user", {
@@ -50,8 +78,6 @@ function SavedCountries({ countryList }) {
     getNewestUserData();
     getSavedCountries();
   }, []);
-  console.log("Form Submitted");
-
   const matchedCountries = savedCountries.map((savedCountry) => {
     return countryList.find((country) => {
       return country.name.common === savedCountry.country_name;
@@ -64,7 +90,7 @@ function SavedCountries({ countryList }) {
       {newestUserData && (
         <h2 className="welcome">Welcome, {newestUserData.fullName}!</h2>
       )}
-      <form className="profile-form">
+      <form className="profile-form" onSubmit={handleSubmit}>
         <h2 className="form-heading">My Profile</h2>
 
         <input
