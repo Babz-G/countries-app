@@ -15,13 +15,32 @@ function SavedCountries({ countryList }) {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+  // ✨✨ When you fill out the form and click Submit
+  // this function sends your information to the backend
+  // and saves it in the database. ✨✨
+
   const storeUserData = async (data) => {
+    // Declaring an async function called storeUserData
+    // Async allows us to use 'await' to wait for backend responses
+    // The function receives form data through the (data) parameter
+
     const response = await fetch("/api/add-one-user", {
+      // fetch() makes an HTTP request to the backend
+      // "/api/add-one-user" is the API endpoint where we're sending the data
+      // await makes the code wait for the backend to respond before continuing
+
       method: "POST",
+      // POST means we're SENDING data TO the backend (not getting data)
+
       headers: {
         "Content-Type": "application/json",
+        // Tells the backend were sending the JSON data"
       },
+
       body: JSON.stringify({
+        // JSON.stringify() converts JS object into a JSON string
+        // bc data traveling over the internet must be in text format
+        // Use dot notation to match our form data with what the backend expects
         name: data.fullName,
         country_name: data.country,
         email: data.email,
@@ -29,9 +48,13 @@ function SavedCountries({ countryList }) {
       }),
     });
 
+    // If the response is text type, use response.text()
+    // If the response is JSON data, use response.json()
+    // The backend returns a text message: "Success! User has been added."
     const result = await response.text();
     console.log(result);
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
