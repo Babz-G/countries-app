@@ -12,6 +12,20 @@ export default function CountryDetail({ countryList }) {
   // country is undefined bc countryList is empty while api loads.
   // then my cide tries to access country.flag.png but crashes bc country doesnt exist yet.
   // the if (!country) makes sure the country exists before trying to display it.
+
+  const saveThisCountry = async () => {
+    const response = await fetch("/api/save-one-country", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        country_name: country.name.common,
+      }),
+    });
+    const result = await response.text();
+    console.log(result);
+  };
   return (
     <div className="country-detail-page">
       <Link to="/" className="back-button">
@@ -27,7 +41,9 @@ export default function CountryDetail({ countryList }) {
 
         <div className="detail-info">
           <h1>{country.name.common}</h1>
-          <button className="save-button">Save</button>
+          <button className="save-button" onClick={saveThisCountry}>
+            Save
+          </button>
 
           <div className="detail-text">
             <p>
