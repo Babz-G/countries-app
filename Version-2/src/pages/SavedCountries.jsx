@@ -10,6 +10,7 @@ function SavedCountries({ countryList }) {
   });
   const [newestUserData, setNewestUserData] = useState(null);
   const [savedCountries, setSavedCountries] = useState([]);
+  const [showForm, setShowForm] = useState(true);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -82,6 +83,7 @@ function SavedCountries({ countryList }) {
     getNewestUserData();
     // Fetches the newest user data from the backend
     // This updates the welcome message to show the user's name after they submit
+    setShowForm(false);
   };
   const getNewestUserData = async () => {
     try {
@@ -129,7 +131,7 @@ function SavedCountries({ countryList }) {
       {newestUserData && (
         <h2 className="welcome">Welcome, {newestUserData.fullName}!</h2>
       )}
-      <form className="profile-form" onSubmit={handleSubmit}>
+      {/* <form className="profile-form" onSubmit={handleSubmit}>
         <h2 className="form-heading">My Profile</h2>
 
         <input
@@ -171,7 +173,57 @@ function SavedCountries({ countryList }) {
         <button type="submit" className="form-submit">
           Submit
         </button>
-      </form>
+      </form> */}
+      {showForm ? (
+        <form className="profile-form" onSubmit={handleSubmit}>
+          <h2 className="form-heading">My Profile</h2>
+
+          <input
+            type="text"
+            name="fullName"
+            value={formData.fullName}
+            onChange={handleInputChange}
+            placeholder="Full name"
+            className="form-input"
+            required
+          ></input>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            placeholder="Email"
+            className="form-input"
+            required
+          ></input>
+          <input
+            type="text"
+            name="country"
+            value={formData.country}
+            onChange={handleInputChange}
+            placeholder="Country"
+            className="form-input"
+            required
+          ></input>
+          <textarea
+            name="bio"
+            value={formData.bio}
+            onChange={handleInputChange}
+            placeholder="Bio"
+            className="form-textarea"
+            required
+          />
+
+          <button type="submit" className="form-submit">
+            Submit
+          </button>
+        </form>
+      ) : (
+        <button className="form-submit" onClick={() => setShowForm(true)}>
+          Resubmit
+        </button>
+      )}
+
       <div className="card-container">
         {matchedCountries.map((country) => (
           <CountryCard country={country} key={country.cca3} />
