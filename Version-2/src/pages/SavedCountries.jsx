@@ -11,6 +11,9 @@ function SavedCountries({ countryList }) {
   const [newestUserData, setNewestUserData] = useState(null);
   const [savedCountries, setSavedCountries] = useState([]);
   const [showForm, setShowForm] = useState(true);
+  // ✨✨ ^^ STRETCH GOAL 3 Tracks whether the form should be visible ✨✨
+  // ✨✨ Initially true so form shows when page loads ✨✨
+  // ✨✨ Changes to false after submission to hide form ✨✨
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -85,6 +88,9 @@ function SavedCountries({ countryList }) {
     // This updates the welcome message to show the user's name after they submit
     setShowForm(false);
   };
+  // ✨✨ STRETCH GOAL 3: Hides the form after submission ✨✨
+  // ✨✨ Added so the form disappears & shows Resubmit button instead ✨✨
+
   const getNewestUserData = async () => {
     try {
       const response = await fetch("/api/get-newest-user", {
@@ -177,7 +183,11 @@ function SavedCountries({ countryList }) {
       {showForm ? (
         <form className="profile-form" onSubmit={handleSubmit}>
           <h2 className="form-heading">My Profile</h2>
+          {/* ✨✨ STRETCH GOAL 3 Conditional rendering based on showForm state ✨✨ */}
+          {/* ✨✨ BEFORE: Form was always visible ✨✨ */}
+          {/* ✨✨ AFTER: Form shows when showForm is true resubmit button shows when false ✨✨ */}
 
+          {/* ✨✨ If showForm is true display the full form ✨✨ */}
           <input
             type="text"
             name="fullName"
@@ -219,6 +229,8 @@ function SavedCountries({ countryList }) {
           </button>
         </form>
       ) : (
+        // ✨✨ If showForm is false then display the resubmit button ✨✨
+        // ✨✨ Clicking this button sets showForm back to true, revealing the form again ✨✨
         <button className="form-submit" onClick={() => setShowForm(true)}>
           Resubmit
         </button>
