@@ -1,4 +1,5 @@
 import { Link, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 export default function CountryDetail({ countryList }) {
   const countryName = useParams().countryName;
@@ -8,6 +9,7 @@ export default function CountryDetail({ countryList }) {
   if (!country) {
     return <div>Loading...</div>;
   }
+  const [viewCount, setViewCount] = useState(null);
   // added this line bc when i refreshed countryDetail page, it crashed.
   // country is undefined bc countryList is empty while api loads.
   // then my cide tries to access country.flag.png but crashes bc country doesnt exist yet.
@@ -26,6 +28,38 @@ export default function CountryDetail({ countryList }) {
     const result = await response.text();
     console.log(result);
   };
+  const addOneView = async () => {
+    const response = await fetch("/api/update-one-country-count", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        country_name: country.name.common,
+      }),
+    });
+    const data = await response.json();
+    setViewCount(data.count); // .count is the property from API response.
+  };
+  useEffect(() => {
+    addOneView();
+  }, []);
+
+  //unsave country
+  const unSaveCountry = async () => {
+    const response = await fetch("/api/unsave-one-country", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        country_name: country.name.common,
+      }),
+    });
+    const result = await response.text();
+    console.log(result);
+  };
+
   return (
     <div className="country-detail-page">
       <Link to="/" className="back-button">
@@ -39,10 +73,15 @@ export default function CountryDetail({ countryList }) {
           className="detail-flag"
         />
 
+        {/* save country button*/}
         <div className="detail-info">
           <h1>{country.name.common}</h1>
           <button className="save-button" onClick={saveThisCountry}>
             Save
+          </button>
+          {/* unsave country button */}
+          <button className="save-button" onClick={unSaveCountry}>
+            Unsave
           </button>
 
           <div className="detail-text">
@@ -56,6 +95,11 @@ export default function CountryDetail({ countryList }) {
               <strong>Capital:</strong>{" "}
               {country.capital ? country.capital[0] : "N/A"}
             </p>
+            {viewCount !== null && (
+              <p>
+                <strong>Views:</strong> {viewCount}
+              </p>
+            )}
           </div>
         </div>
       </div>

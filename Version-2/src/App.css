@@ -275,6 +275,11 @@ nav a:last-child {
   font-family: var(--font);
   font-size: 14px;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+.form-submit:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  transform: translateY(-5px);
 }
 
 @media (max-width: 800px) {
@@ -329,10 +334,12 @@ nav a:last-child {
   font-weight: 300;
   margin-bottom: 80px;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .back-button:hover {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  transform: translateY(-5px);
 }
 
 .detail-content {
@@ -372,10 +379,14 @@ nav a:last-child {
   cursor: pointer;
   margin-bottom: 17px;
   margin-top: 17px;
+  transition: all 0.3s ease;
+  /* margin: 8px; */
+  margin-right: 8px;
 }
 .save-button:hover {
   /* box-shadow: 0 0 15px rgba(0, 0, 0, 0.4); */
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
 }
 /* CSS MEASUREMENTS - COUNTRY DETAIL PAGE
 LAYOUT 280, 82, 343, 80
