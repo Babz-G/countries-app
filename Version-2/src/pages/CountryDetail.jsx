@@ -12,7 +12,7 @@ export default function CountryDetail({ countryList }) {
   const [viewCount, setViewCount] = useState(null);
   // added this line bc when i refreshed countryDetail page, it crashed.
   // country is undefined bc countryList is empty while api loads.
-  // then my cide tries to access country.flag.png but crashes bc country doesnt exist yet.
+  // then my code tries to access country.flag.png but crashes bc country doesnt exist yet.
   // the if (!country) makes sure the country exists before trying to display it.
 
   const saveThisCountry = async () => {
