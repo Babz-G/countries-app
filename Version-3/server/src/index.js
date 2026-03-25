@@ -20,7 +20,9 @@ app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
 });
 
-// ✨✨ HELPER FUNCTIONS ✨✨
+// ******************************
+//    ✨✨ HELPER FUNCTIONS ✨✨
+// ******************************
 
 // 1. getNewestUser()
 async function getNewestUser() {
@@ -66,3 +68,47 @@ async function updateOneCountryCount(country_name) {
   );
   return result.rows[0];
 }
+
+// ******************************
+//     ✨✨ API ENDPOINTS ✨✨
+// ******************************
+
+// 1. GET /get-newest-user
+app.get("/get-newest-user", async (req, res) => {
+  const user = await getNewestUser();
+  res.json(user);
+});
+
+// 2. POST /add-one-user
+app.post("/add-one-user", async (req, res) => {
+  const { name, country_name, email, bio } = req.body;
+  await addOneUser(name, country_name, email, bio);
+  res.send(`Success! ${req.body.name} was added! Yay!`);
+});
+
+// 3. GET /get-all-saved-countries
+app.get("/get-all-saved-countries", async (req, res) => {
+  const countries = await getAllSavedCountries();
+  res.json(countries);
+});
+
+// 4. POST /save-one-country
+app.post("/save-one-country", async (req, res) => {
+  const { country_name } = req.body;
+  await saveOneCountry(country_name);
+  res.send(`Success! ${req.body.country_name} was added! Yay!`);
+});
+
+// 5. POST /unsave-one-country
+app.post("/unsave-one-country", async (req, res) => {
+  const { country_name } = req.body;
+  await unsaveOneCountry(country_name);
+  res.send("Success, the country was unsaved!");
+});
+
+// 6. POST /update-one-country-count
+app.post("/update-one-country-count", async (req, res) => {
+  const { country_name } = req.body;
+  const result = await updateOneCountryCount(country_name);
+  res.json(result);
+});
