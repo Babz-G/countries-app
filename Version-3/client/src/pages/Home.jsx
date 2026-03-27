@@ -68,6 +68,7 @@ function Home({ countryList }) {
 
           .sort((a, b) => a.name.common.localeCompare(b.name.common))
 
+          // 🌟🌟🌟
           .map((country) => (
             <CountryCard country={country} key={country.cca3} />
           ))}

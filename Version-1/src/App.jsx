@@ -6,9 +6,15 @@ import CountryDetail from "./pages/CountryDetail";
 import { useState, useEffect } from "react";
 import localData from "./localData";
 
+// 🌟🌟🌟
 function App() {
   const [countryList, setCountryList] = useState([]);
   // Declaring a state variable
+  // Starts as empty array
+  // Once the data comes back form API thats where its stored.
+  // when state updates react automatically re-renders the page w new data
+
+  // 🌟🌟🌟
   const getCountryList = async () => {
     // Async gives access to await
     try {
@@ -24,6 +30,8 @@ function App() {
       console.log(error);
     }
   };
+
+  // 🌟🌟🌟
   useEffect(() => {
     getCountryList();
   }, []);
@@ -36,6 +44,7 @@ function App() {
           <Link to="/saved">Saved Countries</Link>
         </nav>
       </header>
+
       <Routes>
         <Route path="/" element={<Home countryList={countryList} />} />
         <Route
