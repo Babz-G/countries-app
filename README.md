@@ -18,14 +18,15 @@ A full-stack web application for browsing and saving country data sourced from t
 
 ## 🖼️ Screenshots
 
-Instructions to add a screenshot:
+Here is where you'll include a screenshot of your project to show it off!
 
-1. Use `Command + Control + Shift + 4` to take a screenshot and copy it to your clipboard
-2. Find your `README.md` on GitHub and click the pencil icon ✏️ to edit
-3. Paste the screenshot where you want it — GitHub will convert it to an `<img>` tag automatically
-4. Click **"Commit changes..."** to save
+Instructions to include a screenshot into your README file:
 
----
+1. Use `Command + Control + Shift + 4` to take a screenshot of your site and copy the screenshot to your clipboard
+2. Find your Github `README.md` file on the Github website
+3. Edit the site by clicking on the Pencil icon on the top right of the page ✏️
+4. Move your cursor to the position where you want to paste the screenshot, then paste it. Github will convert the pasted screenshot into an `<img>` tag
+5. Select "Commit changes..." to save your changes
 
 ## ✨ Features
 
