@@ -22,7 +22,7 @@ A full-stack web application for browsing and saving country data sourced from t
 
 ## 🚀 Live Site
 
-🔗 [View the live app here](______)
+🔗 [View the live app here](https://countries-app-version-4-april-2026.netlify.app/)
 
 ---
 
@@ -88,7 +88,7 @@ A full-stack web application for browsing and saving country data sourced from t
 | `POST` | `/unsave-one-country`       | Unsaves a country if it has been saved          |
 | `POST` | `/update-one-country-count` | Updates the view count for a country            |
 
-🔗 Full API documentation: **\_\_**
+🔗 Full API documentation: [View here](https://github.com/ac-backend/countries-app-instructions/blob/main/version-3/api-documentation.md)
 
 ---
 
