@@ -2,6 +2,16 @@
 
 > _Explore the world, one country at a time._
 
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![Netlify](https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)
+![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)
+
 ---
 
 ## 📌 Project Description & Purpose
@@ -18,15 +28,13 @@ A full-stack web application for browsing and saving country data sourced from t
 
 ## 🖼️ Screenshots
 
-Here is where you'll include a screenshot of your project to show it off!
+**Home Page**
 
-Instructions to include a screenshot into your README file:
+**Country Detail Page**
 
-1. Use `Command + Control + Shift + 4` to take a screenshot of your site and copy the screenshot to your clipboard
-2. Find your Github `README.md` file on the Github website
-3. Edit the site by clicking on the Pencil icon on the top right of the page ✏️
-4. Move your cursor to the position where you want to paste the screenshot, then paste it. Github will convert the pasted screenshot into an `<img>` tag
-5. Select "Commit changes..." to save your changes
+**Saved Countries Page**
+
+---
 
 ## ✨ Features
 
@@ -111,20 +119,23 @@ CREATE TABLE country_counts (
 
 ## 💭 Reflections
 
-**What I learned:** \_\_\_\_
+**What I learned:**  
+How to build a full-stack application from scratch, including setting up a REST API with Express, connecting it to a PostgreSQL database, and fetching and displaying data on the frontend with React.
 
-**What I'm proud of:** \_\_\_\_
+**What I'm proud of:**  
+Successfully connecting the frontend and backend together and implementing features like the save/unsave toggle and the live view count tracker.
 
-**What challenged me:** \_\_\_\_
+**What challenged me:**  
+Resolving merge conflicts in Git. I learned that editing files directly on GitHub while also making local changes causes the two versions to diverge, and how to fix it using VS Code's merge editor.
 
 **Future ideas:**
 
-1. ***
-2. ***
-3. ***
+1. Add an interactive world map where you can click on a country directly to visit its detail page
+2. Add a quiz mode where users can test their knowledge of country capitals and flags
+3. Add a light/dark mode toggle
 
 ---
 
 ## 🙌 Credits & Shoutouts
 
-**☆ My instructors, [@ninhja](https://github.com/ninhja) + [@PhillipDaum](https://github.com/PhillipDaum)! ☆**
+**☆ Shout out to my instructors, [@ninhja](https://github.com/ninhja) + [@PhillipDaum](https://github.com/PhillipDaum) for all their patience & guidance!! ☆**
