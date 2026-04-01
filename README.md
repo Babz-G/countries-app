@@ -29,7 +29,8 @@ A full-stack web application for browsing and saving country data sourced from t
 ## 🖼️ Screenshots
 
 **Home Page**
-<img width="1388" height="693" alt="countries-app-homepage" src="https://github.com/user-attachments/assets/71fb9ea4-2eb2-4a29-b2a1-357f4c769cb6" />
+<img width="1421" height="703" alt="Screenshot 2026-04-01 at 1 02 13 PM" src="https://github.com/user-attachments/assets/311d3c76-d4fc-4566-a73c-40c83cce7953" />
+
 
 **Country Detail Page**
 <img width="1388" height="697" alt="country-detail-page" src="https://github.com/user-attachments/assets/1221313f-fa28-4a26-aab2-20845e33e2ef" />
