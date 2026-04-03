@@ -65,14 +65,14 @@ A full-stack web application for browsing and saving country data sourced from t
 | ---------- | -------------------- |
 | Languages  | JavaScript           |
 | Framework  | Express.js (Node.js) |
-| Deployment | Neon                 |
+| Deployment | Render               |
 
 ### **Database**
 
-|            |                     |
-| ---------- | ------------------- |
-| Language   | SQL                 |
-| Deployment | Render (PostgreSQL) |
+|            |      |
+| ---------- | ---- |
+| Language   | SQL  |
+| Deployment | Neon |
 
 ---
 
