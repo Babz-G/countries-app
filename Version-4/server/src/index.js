@@ -1,7 +1,9 @@
 // importing our Node modules
 import express from "express"; // the framework that lets us build a web server
 import pg from "pg"; // pg stands for PostgreSQL, for connecting to the database
-import config from "./config.js"; // importing our database connection string
+
+// import config from "./config.js"; // importing our database connection string
+// ^^ delete this line when deplying from render ^^
 
 // connect to our PostgreSQL database, or db for short
 const db = new pg.Pool({
