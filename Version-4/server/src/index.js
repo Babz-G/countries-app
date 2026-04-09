@@ -5,7 +5,7 @@ import config from "./config.js"; // importing our database connection string
 
 // connect to our PostgreSQL database, or db for short
 const db = new pg.Pool({
-  connectionString: config.databaseUrl, // this contains credentials to access the database. Keep this private!!!
+  connectionString: process.env.DATABASE_URL, // this contains credentials to access the database. Keep this private!!!
   ssl: true, // use SSL encryption when connecting to the database
 });
 
