@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import CountryCard from "../Components/CountryCard.jsx";
+import { Link } from "react-router-dom";
 
 function SavedCountries({ countryList }) {
   const [formData, setFormData] = useState({
@@ -136,6 +137,9 @@ function SavedCountries({ countryList }) {
   return (
     <div className="saved-countries-page">
       <h1 className="page-heading">My Saved Countries</h1>
+      <Link to="/" className="back-button saved-countries-back-button">
+        ← Back
+      </Link>
       {newestUserData && (
         <h2 className="welcome">Welcome, {newestUserData.fullName}!</h2>
       )}

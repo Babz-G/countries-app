@@ -391,6 +391,9 @@ nav a:last-child {
 .resubmit-button {
   margin-left: 80px;
 }
+.saved-countries-back-button {
+  margin-left: 80px;
+}
 /* CSS MEASUREMENTS - COUNTRY DETAIL PAGE
 LAYOUT 280, 82, 343, 80
 FLAG 560x401
