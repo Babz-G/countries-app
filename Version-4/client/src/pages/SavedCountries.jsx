@@ -198,7 +198,10 @@ function SavedCountries({ countryList }) {
       ) : (
         // ✨✨ If showForm is false then display the resubmit button ✨✨
         // ✨✨ Clicking this button sets showForm back to true, revealing the form again ✨✨
-        <button className="form-submit" onClick={() => setShowForm(true)}>
+        <button
+          className="form-submit resubmit-button"
+          onClick={() => setShowForm(true)}
+        >
           Resubmit
         </button>
       )}

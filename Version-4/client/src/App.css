@@ -388,6 +388,9 @@ nav a:last-child {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
   transform: translateY(-5px);
 }
+.resubmit-button {
+  margin-left: 80px;
+}
 /* CSS MEASUREMENTS - COUNTRY DETAIL PAGE
 LAYOUT 280, 82, 343, 80
 FLAG 560x401
